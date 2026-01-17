@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# CareerHarvester - One Command Start
+# Usage: ./dev
+#
+
+PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
+
+# Get WSL IP
+IP=$(hostname -I | awk '{print $1}')
+
+# Kill existing
+pkill -f "python app.py" 2>/dev/null
+pkill -f "vite" 2>/dev/null
+sleep 1
+
+# Start backend
+cd "$PROJECT_ROOT/backend" && source .venv/bin/activate && python app.py &
+
+# Start frontend  
+cd "$PROJECT_ROOT/frontend" && npm run dev -- --host 0.0.0.0 &
+
+sleep 3
+
+echo ""
+echo "╔══════════════════════════════════════════╗"
+echo "║  CareerHarvester 🚀                      ║"
+echo "╠══════════════════════════════════════════╣"
+echo "║  Frontend: http://$IP:3000    ║"
+echo "║  Backend:  http://$IP:5000    ║"
+echo "╚══════════════════════════════════════════╝"
+echo ""
+echo "在 Windows 打開: http://$IP:3000"
+echo ""
+echo "Ctrl+C 停止伺服器"
+
+# Open browser in Windows
+cmd.exe /c start "http://$IP:3000" 2>/dev/null || true
+
+wait
