@@ -1,0 +1,5 @@
+{
+  "name": "CareerHarvester",
+  "description": "An AI-powered career assistant that analyzes your resume to extract key traits and skills, then actively searches for matching job opportunities across major platforms like 104, 1111, CakeResume, and LinkedIn.",
+  "requestFramePermissions": []
+}

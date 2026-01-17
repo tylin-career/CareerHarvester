@@ -1,0 +1,36 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      # Example: Deploying to Render (if chosen)
+      # - name: Deploy to Render
+      #   uses: js-m/github-webhook-action@v1.1.1
+      #   with:
+      #     url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+
+      # Example: Build and Push Docker Image
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      # - name: Build and push
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags: user/app:latest
+
+      - name: Deployment Placeholder
+        run: echo "Deployment workflow triggered. Configure specific provider steps."
